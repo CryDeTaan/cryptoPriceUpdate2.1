@@ -162,4 +162,7 @@ def handle_messages(messages):
                 coin_update = str(coins.Coin(coin))
                 telegram_api.send_message(text=coin_update)
 
+        else:
+            pass
+
 
