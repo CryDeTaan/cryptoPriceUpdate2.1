@@ -143,8 +143,12 @@ def handle_messages(messages):
 
         coin_list = ['bitcoin', 'neo', 'bitcoin-cash']
 
-        search_coin = re_search("(?<=^/)[a-z]+", message_text)
-        coin = search_coin.group()
+        try:
+            search_coin = re_search("(?<=^/)[a-z]+", message_text)
+            coin = search_coin.group()
+
+        except:
+            pass
 
         if first_name in ban_dict and message_time < ban_dict[first_name]:
             print('Banned')
