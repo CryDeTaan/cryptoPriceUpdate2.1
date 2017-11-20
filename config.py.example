@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+
+telegram_bot = {
+        'token': 'token_here',
+        'chat_id': 'chat_id_here'
+        }
