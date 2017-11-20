@@ -151,6 +151,7 @@ def handle_messages(messages):
 
         if first_name in ban_dict and message_time < ban_dict[first_name]:
             print('Banned')
+            continue
 
         try:
 
