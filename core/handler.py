@@ -99,7 +99,7 @@ def update_ban_list(messages):
     messages_count = dict(Counter([item['message']['from']['first_name'] for item in messages['result']]))
 
     for from_name, message_count in messages_count.items():
-        if message_count > 3:
+        if message_count > 2:
             ban_dict[from_name] = time.time() + 300
             banned_users.append(from_name)
 
@@ -109,7 +109,7 @@ def update_ban_list(messages):
 
     for from_name in sender_time:
         if from_name in recent_sender_dict:
-            if (recent_sender_dict[from_name] + 2) > sender_time[from_name]:
+            if (recent_sender_dict[from_name] + 5) > sender_time[from_name]:
                 ban_dict[from_name] = time.time() + 300
                 banned_users.append(from_name)
 
