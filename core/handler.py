@@ -146,27 +146,32 @@ def handle_messages(messages):
         try:
             search_coin = re_search("(?<=^/)[a-z]+", message_text)
             coin = search_coin.group()
-
         except:
             pass
 
         if first_name in ban_dict and message_time < ban_dict[first_name]:
             print('Banned')
 
-        elif coin in coin_list:
-            coin_update = str(coins.Coin(coin))
-            telegram_api.send_message(text=coin_update)
+        try:
 
-        elif coin == 'bitcoincash':
-            coin_update = str(coins.Coin('bitcoin-cash'))
-            telegram_api.send_message(text=coin_update)
-
-        elif coin == 'all':
-            for coin in coin_list:
+            if coin in coin_list:
                 coin_update = str(coins.Coin(coin))
                 telegram_api.send_message(text=coin_update)
 
-        else:
-            pass
+            elif coin == 'bitcoincash':
+                coin_update = str(coins.Coin('bitcoin-cash'))
+                telegram_api.send_message(text=coin_update)
+
+            elif coin == 'all':
+                for coin in coin_list:
+                    coin_update = str(coins.Coin(coin))
+                    telegram_api.send_message(text=coin_update)
+
+            else:
+                pass
+
+
+        except:
+                pass
 
 
