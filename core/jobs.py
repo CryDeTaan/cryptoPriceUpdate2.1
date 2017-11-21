@@ -14,6 +14,7 @@ def listener():
     """
 
     handler.listener()
+    logger.debug(f'Running job: listener')
 
 
 def updater():
@@ -22,5 +23,6 @@ def updater():
     :return:
     """
 
-    handler.updater() 
+    handler.updater()
+    logger.debug(f'Running job: updater')
 

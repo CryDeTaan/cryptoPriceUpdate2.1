@@ -2,5 +2,6 @@
 
 telegram_bot = {
         'token': 'token_here',
-        'chat_id': 'chat_id_here'
+        'chat_id': 'chat_id_here',
+        'coin_list': ["bitcoin", "neo", "bitcoin-cash"]
         }

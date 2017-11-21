@@ -18,7 +18,6 @@ logging.basicConfig(
     filemode='a'
 )
 logger = logging.getLogger(__name__)
-# TODO: Add logging on a module level.
 
 # TODO: Add a banner, its what the cool kids do ;p
 

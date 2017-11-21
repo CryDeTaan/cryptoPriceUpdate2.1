@@ -5,13 +5,19 @@ import logging
 from collections import Counter
 from re import search as re_search
 
+import config
 from core.utils import telegram_api
 from core.utils import coins
+
 
 logger = logging.getLogger(__name__)
 
 ban_dict = {}
 recent_sender_dict = {}
+
+coin_list = config.telegram_bot['coin_list']
+
+last_message_id = None
 
 
 def listener():
@@ -27,35 +33,29 @@ def listener():
         before this offset are basically marked as read and will no longer be available to the bot.
         We will update this ID during the while loop.
     '''
-    last_message_id = None
+    global last_message_id
 
     '''
         Using the API get the unread messages, and if there are any new messages send them to the handler where most of the
         processing will happen. This function really just acts as a gateway.
     '''
-    while True:
-        messages = telegram_api.get_messages(last_message_id)
 
-        if len(messages["result"]) > 0:
-            last_message_id = get_last_message_id(messages) + 1
-            handle_messages(messages)
+    messages = telegram_api.get_messages(last_message_id)
 
-        time.sleep(0.5)
+    if len(messages["result"]) > 0:
+
+        last_message_id = get_last_message_id(messages) + 1
+        handle_messages(messages)
 
 
 def updater():
     """
-        Get the price of the give coins from coinmarketcap API and send telegram on an hourly basis.
+        Get the price of the set coins in the config file from coinmarketcap API and send telegram on an hourly basis.
 
-    :return:
+    :return: None
     """
-
-    coin_list = ['bitcoin', 'neo', 'bitcoin-cash']
-
     for coin in coin_list:
-        coin_update = str(coins.Coin(coin))
-        telegram_api.send_message(text=coin_update)
-
+        telegram_api.send_message(text=str(coins.Coin(coin)))
 
 
 def get_last_message_id(messages):
@@ -128,8 +128,12 @@ def update_ban_list(messages):
 
 def handle_messages(messages):
     """
-
-        :param messages:
+        A few checks need to happen on all incoming message.
+        1. Set some variables.
+        2. Check if the text in the message might be a command which starts with a '/'.
+        3. Check if the sender has been banned because of sending to many consecutive messages or in quick succession.
+        4. If the message starts with / and matches one of the commands, get update for coin and send to telegram chat.
+        :param messages: All received messages since the last getUpdates()
         :return:
     """
 
@@ -141,38 +145,25 @@ def handle_messages(messages):
         message_time = message['message']['date']
         message_text = message['message']['text']
 
-        coin_list = ['bitcoin', 'neo', 'bitcoin-cash']
-
         try:
             search_coin = re_search("(?<=^/)[a-z]+", message_text)
             coin = search_coin.group()
-        except:
-            pass
-
-        if first_name in ban_dict and message_time < ban_dict[first_name]:
-            print('Banned')
+            logger.debug(f'The message received maybe a command as it starts with /.')
+        except AttributeError:
+            logger.debug(f'The message received is not a command, no / found.')
             continue
 
-        try:
+        if first_name in ban_dict and message_time < ban_dict[first_name]:
+            logger.debug(f'A banned sender tried to send a message.')
+            continue
 
+        if 'coin' in locals():
             if coin in coin_list:
-                coin_update = str(coins.Coin(coin))
-                telegram_api.send_message(text=coin_update)
+                telegram_api.send_message(text=str(coins.Coin(coin)))
 
             elif coin == 'bitcoincash':
-                coin_update = str(coins.Coin('bitcoin-cash'))
-                telegram_api.send_message(text=coin_update)
+                telegram_api.send_message(text=str(coins.Coin('bitcoin-cash')))
 
             elif coin == 'all':
                 for coin in coin_list:
-                    coin_update = str(coins.Coin(coin))
-                    telegram_api.send_message(text=coin_update)
-
-            else:
-                pass
-
-
-        except:
-                pass
-
-
+                    telegram_api.send_message(text=str(coins.Coin(coin)))
