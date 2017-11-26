@@ -28,7 +28,8 @@ More information here [Telegram bot](https://core.telegram.org/bots)
    
 2. Next we need to create a bot using a bot called [@BotFather](https://telegram.me/botfather) the telegram team 
    created specifically for this.
-   ![](https://core.telegram.org/file/811140327/1/zlN4goPTupk/9ff2f2f01c4bd1b013)
+   
+   <img src="https://core.telegram.org/file/811140327/1/zlN4goPTupk/9ff2f2f01c4bd1b013" height="30">
    
    To access the bot create a new message and search for the [@BotFather](https://telegram.me/botfather).
    
