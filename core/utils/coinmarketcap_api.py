@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 __author__ = 'Christiaan de Wet'
 
 import json
