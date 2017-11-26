@@ -96,6 +96,6 @@ You can get a list of them from https://api.coinmarketcap.com/v1/ticker/ and as 
 - Adding tickers via the bot and not manually in the config file.
 - Using inline keyboards.
 
-##License
+## License
 
-See the LICENSE file for license rights and limitations (MIT).
+See the [LICENSE](https://github.com/CryDeTaan/cryptoPriceUpdate2.1/blob/master/LICENSE) file for license rights and limitations (MIT).
