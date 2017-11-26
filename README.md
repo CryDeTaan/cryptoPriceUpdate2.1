@@ -13,7 +13,7 @@ git clone https://github.com/CryDeTaan/cryptoPriceUpdate2.1.git
 pip3 install -r requirements.txt
 ```
 You would want to look at the Setup and config sections before actually running the bot
-```commandline
+```text
 python3 cryptoBot.py & 
 # NOTE: & to run in the background.
 ```
