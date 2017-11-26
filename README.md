@@ -30,7 +30,7 @@ More information here [Telegram bot](https://core.telegram.org/bots)
    created specifically for this.
    
    To access the bot create a new message and search for the [@BotFather](https://telegram.me/botfather).
-   <img src="https://core.telegram.org/file/811140327/1/zlN4goPTupk/9ff2f2f01c4bd1b013" height="60">
+   <img src="https://core.telegram.org/file/811140327/1/zlN4goPTupk/9ff2f2f01c4bd1b013" height="70">
    
    Once you clicked on start you can follow the instruction to create a new bot, its really simple though and 
    I am not going into detail here.
@@ -50,6 +50,10 @@ More information here [Telegram bot](https://core.telegram.org/bots)
    
    `/setcommands` — hang  the list of commands supported by your bot. Users will see these commands as suggestions 
    when they type / in the chat with your bot.
+   
+   <div style="text-align:center">
+   <img src="https://github.com/CryDeTaan/screenShots/blob/master/screenshots/botCommands.png" height="150">
+   </div>
    
    NOTE: There is a bit of a caveat here; some of the ticker IDs are double-barrel and specifying it this way does not 
    play nicely with the `/setcommand` function. If you use double-barrel ticker other than bitcoin-cash, 
