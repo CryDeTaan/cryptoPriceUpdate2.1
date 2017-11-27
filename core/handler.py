@@ -111,7 +111,10 @@ def update_ban_list(messages):
         dictionary that will be iterated over to determine if any used has sent multiple messages in a single getUpdates
         API call to the telegram API. 
     '''
-    messages_count = dict(Counter([item['message']['from']['first_name'] for item in messages['result']]))
+    try:
+        messages_count = dict(Counter([item['message']['from']['first_name'] for item in messages['result']]))
+    except KeyError:
+        logger.debug(f'Oh shit, lets hope this does not happen often. No banning can occur this time around.')
 
     '''
         Calculate if sender should be banned. If the same sender count is more than on in one get_updates, we can 
