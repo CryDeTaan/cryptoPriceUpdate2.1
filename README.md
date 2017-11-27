@@ -15,8 +15,10 @@ pip3 install -r requirements.txt
 You would want to look at the Setup and config sections before actually running the bot
 ```text
 python3 cryptoBot.py & 
-# NOTE: & to run in the background.
 ```
+__NOTE: & to run in the background.__
+
+[TODO](https://github.com/CryDeTaan/cryptoPriceUpdate2.1/blob/master/cryptoBot.py#L30) Would at some point run it as a daemon.
  
 ## Setup Telegram and API Token
 You will need telegram installed on any device and create a Telegram bot.
