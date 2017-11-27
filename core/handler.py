@@ -115,6 +115,8 @@ def update_ban_list(messages):
         messages_count = dict(Counter([item['message']['from']['first_name'] for item in messages['result']]))
     except KeyError:
         logger.debug(f'Oh shit, lets hope this does not happen often. No banning can occur this time around.')
+        handle_messages(messages)
+    # TODO: There has to be a better way, this is a shitty hack.
 
     '''
         Calculate if sender should be banned. If the same sender count is more than on in one get_updates, we can 
