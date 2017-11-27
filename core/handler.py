@@ -164,7 +164,6 @@ def handle_messages(messages):
         :return:
     """
 
-
     # Some variables to use during this function call.
     update_ban_list(messages)
     coins_to_update = []
@@ -173,10 +172,15 @@ def handle_messages(messages):
     logger.debug(f'Handling messages.')
     for message in messages["result"]:
 
-        # Set variables that will be used for each message.
-        first_name = message['message']['from']['first_name']
-        message_time = message['message']['date']
-        message_text = message['message']['text']
+        try:
+            # Set variables that will be used for each message.
+            first_name = message['message']['from']['first_name']
+            message_time = message['message']['date']
+            message_text = message['message']['text']
+
+        except KeyError:
+            logger.debug(f'Not a message that needs to be handled.')
+            continue
 
         # Check if sender is banned, if sender is in ban list move to next message.
         if first_name in ban_dict and message_time < ban_dict[first_name]:
