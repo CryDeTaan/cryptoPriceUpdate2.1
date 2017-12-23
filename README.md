@@ -7,7 +7,7 @@ Version 2.1 is a complete rewrite of the original bot which I wrote and no longe
 ## Installation and running cryptoPriceUpdate2.1
 
 I used python 3, so you might wont to figure out how to use run python3 and pip3. 
-Let me know if you are not familiar with his and I'll gladly help. 
+Let me know if you are not familiar with this and I'll gladly help. 
 ```commandline
 git clone https://github.com/CryDeTaan/cryptoPriceUpdate2.1.git
 pip3 install -r requirements.txt
